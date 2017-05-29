@@ -15,9 +15,14 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
+            //'baseUrl' => ''
+        ],
+        'assetManager' => [
+            'basePath' => '@webroot/assets',
+            'baseUrl' => '@web/assets'
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => \dektrium\user\models\User::className(),
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
@@ -34,17 +39,16 @@ return [
                 ],
             ],
         ],
+
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'main/error',
         ],
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
-        */
     ],
     'params' => $params,
 ];

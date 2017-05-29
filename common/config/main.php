@@ -1,6 +1,7 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'language' => 'ru-RU',
     'modules' => [
         'user' => [
             'class' => 'dektrium\user\Module',
@@ -30,7 +31,7 @@ return [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
                     'fileMap' => [
-                        'mail' => 'mail.php',
+                        'mail' => 'frontend.php',
                     ],
                 ],
             ],
@@ -38,5 +39,8 @@ return [
         'authManager' => [
             'class' => \yii\rbac\DbManager::className(),
         ],
+        'keyStorage' => [
+            'class' => \common\components\keyStorage\KeyStorage::className(),
+        ]
     ],
 ];

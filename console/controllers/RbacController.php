@@ -11,8 +11,10 @@ namespace console\controllers;
 
 use common\dicts\ActionDict;
 use common\dicts\RolesDict;
+use common\rbac\UserGroupRule;
+use yii\console\Controller;
 
-class RbacController
+class RbacController extends Controller
 {
     public function actionInit()
     {
@@ -48,19 +50,16 @@ class RbacController
         $userGroupRule = new UserGroupRule();
         $authManager->add($userGroupRule);
 
-        // Add rule "UserGroupRule" in roles
+        //Add rule "UserGroupRule" in roles
         $guest->ruleName  = $userGroupRule->name;
-        $brand->ruleName  = $userGroupRule->name;
         $user->ruleName = $userGroupRule->name;
         $admin->ruleName  = $userGroupRule->name;
 
         // Add roles in Yii::$app->authManager
         $authManager->add($guest);
-        $authManager->add($brand);
         $authManager->add($user);
         $authManager->add($admin);
 
-        // Add permission-per-role in Yii::$app->authManager
         // Guest
         $authManager->addChild($guest, $login);
         $authManager->addChild($guest, $logout);
@@ -69,17 +68,12 @@ class RbacController
         $authManager->addChild($guest, $index);
         $authManager->addChild($guest, $view);
 
-        // BRAND
-        $authManager->addChild($brand, $update);
-        $authManager->addChild($brand, $guest);
-
-        // TALENT
+        // USER
         $authManager->addChild($user, $update);
         $authManager->addChild($user, $guest);
 
         // Admin
         $authManager->addChild($admin, $delete);
         $authManager->addChild($admin, $user);
-        $authManager->addChild($admin, $brand);
     }
 }
