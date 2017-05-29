@@ -1,2 +1,3 @@
-<p style="text-align: center;">->DotaGold<-</p>
-===============================
+<p align="center">
+  <h1>Dota Gold</h1>
+</p>
